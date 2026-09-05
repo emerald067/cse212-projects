@@ -13,7 +13,22 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // Step 1: Create a new double array with the requested length.
+        double[] result = new double[length];
+
+        // Step 2: Use a loop to visit every position in the array.
+        for (int i = 0; i < length; i++)
+        {
+            // Step 3: For each position, calculate the multiple of the supplied number.
+            //         Since the array index starts at 0, multiply by (index + 1).
+            double multiple = number * (i + 1);
+
+            // Step 4: Store the calculated multiple in the current array position.
+            result[i] = multiple;
+        }
+
+        // Step 5: Return the completed array.
+        return result; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +44,26 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+
+        // Step 1: Find the index where the last 'amount' elements begin.
+        //         This is data.Count - amount.
+        int splitIndex = data.Count - amount;
+
+        // Step 2: Use GetRange to save the last 'amount' elements.
+        List<int> lastPart = data.GetRange(splitIndex, amount);
+        
+        // Step 3: Use GetRange to save all the elements before those last elements.
+        List<int> firstPart = data.GetRange(0, splitIndex);
+        
+        // Step 4: Clear the original data list.
+        data.Clear();
+        
+        // Step 5: Add the saved last elements to the beginning of the original list.
+        data.AddRange(lastPart);
+        
+        // Step 6: Add the saved first elements after them.
+        //         The original list is now rotated to the right.
+        data.AddRange(firstPart);
     }
 }
