@@ -33,5 +33,31 @@ public class PriorityQueueTests
         Assert.AreEqual("Charlie", result);
     }
 
+    [TestMethod]
+    // Scenario: Add two items with the same priority and dequeue the highest-priority item.
+    // Expected Result: Alice should be returned first because she was added before Bob.
+    // Defect(s) Found: The comparison used >= instead of >, which caused the later item with the same priority to be selected instead of following FIFO order.
+    public void TestPriorityQueue_3()
+    {
+        var priorityQueue = new PriorityQueue();
+        priorityQueue.Enqueue("Alice", 5);
+        priorityQueue.Enqueue("Bob", 5);
+
+        var result = priorityQueue.Dequeue();
+
+        Assert.AreEqual("Alice", result);
+    }
+
+    [TestMethod]
+    // Scenario: Try to dequeue an item from an empty priority queue.
+    // Expected Result: An InvalidOperationException should be thrown.
+    // Defect(s) Found: No Defect(s) found.
+    public void TestPriorityQueue_4()
+    {
+        var priorityQueue = new PriorityQueue();
+
+        Assert.ThrowsException<InvalidOperationException>(() => priorityQueue.Dequeue());
+    }
+
     // Add more test cases as needed below.
 }
